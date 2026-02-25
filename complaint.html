@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Complaint | Gear 4 Rent</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <a href="index.html" class="logo">⚙️ GEAR 4 RENT</a>
+    <div class="nav-buttons"><a href="index.html" class="nav-btn">Home</a></div>
+</header>
+
+<div class="container">
+    <div class="card" style="max-width:600px; margin:auto;">
+        <h2 style="color:#ef4444; margin-bottom:10px;">File a Complaint</h2>
+        <p>Issues with delivery or device? Tell us here.</p>
+        <form onsubmit="alert('Logged! We will contact you soon.'); window.location.href='index.html'; return false;">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Student Email" required>
+            <select required>
+                <option value="">Select Issue</option>
+                <option>Delayed Delivery</option>
+                <option>Technical Defect</option>
+                <option>Billing Problem</option>
+            </select>
+            <textarea placeholder="Describe the problem..." rows="5" required></textarea>
+            <button type="submit" class="btn-primary nav-btn" style="width:100%; border:none; margin-top:10px; cursor:pointer;">Submit Dispute</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCWZsMhVEB1HbbkTC8igAPlsoE8EzqBtzU",
+            authDomain: "gear-4-rent.firebaseapp.com",
+            projectId: "gear-4-rent",
+            storageBucket: "gear-4-rent.firebasestorage.app",
+            messagingSenderId: "1058165643099",
+            appId: "1:1058165643099:web:70fb0e2411710173aeec7e",
+            measurementId: "G-45SJ1RX06L"
+        };
+
+        // Initialize Firebase with protection
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        // Global variables so your other scripts can 'see' the database
+        window.db = firebase.firestore();
+        window.auth = firebase.auth();
+
+        console.log("Connected to Gear 4 Rent Cloud! 🚀");
+    </script>
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+< lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact & Support | Gear 4 Rent</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Professional Contact Layout */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        .info-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+        .info-card:hover { border-color: #facc15; transform: translateY(-5px); }
+        .info-card h3 { color: #1e3a8a; margin-bottom: 15px; border-bottom: 2px solid #facc15; display: inline-block; }
+
+        /* Student Query History Section */
+        .resolution-header {
+            margin-top: 60px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .query-log {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .log-entry {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .student-tag {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            background: #e0f2fe;
+            padding: 4px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .question {
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .solution-box {
+            background: #f8fafc;
+            border-left: 4px solid #16a34a; /* Success Green */
+            padding: 15px;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: #475569;
+        }
+        .staff-label {
+            color: #16a34a;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<>
+
+<header>
+    <a href="index.html" class="logo">⚙️ GEAR 4 RENT</a>
+    <div class="nav-buttons">
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="services.html" class="nav-btn">Services</a>
+        <a href="about.html" class="nav-btn">About Us</a>
+        <a href="contact.html" class="nav-btn">Contact</a>
+        <a href="login.html" class="nav-btn btn-primary">Login</a>
+    </div>
+</header>
+
+<div class="container">
+    <div style="text-align: center;">
+        <h1 style="color: #1e3a8a;">Contact Us</h1>
+        <p style="color: #64748b;">Direct support lines and recent community resolutions.</p>
+    </div>
+
+    <div class="contact-wrapper">
+        <div class="info-card">
+            <h3>🎧 Customer Care</h3>
+            <p><b>Phone:</b> +91 90000 12345</p>
+            <p><b>Email:</b> hello@gearforrent.com</p>
+            <p><b>Social:</b> @gear4rent_official</p>
+        </div>
+        <div class="info-card">
+            <h3>🛠️ Technical Support</h3>
+            <p><b>Phone:</b> +91 90000 54321</p>
+            <p><b>Email:</b> tech.help@gear4rent.in</p>
+            <p><b>LinkedIn:</b> gear-4-rent-india</p>
+        </div>
+        <div class="info-card">
+            <h3>📍 Our Hub</h3>
+            <p>Gear 4 Rent Office,</p>
+            <p>HITEC City, Phase 2,</p>
+            <p>Hyderabad, TS - 500081</p>
+        </div>
+    </div>
+
+    <div class="query-log">
+        <h2 class="resolution-header">✅ Recent Student Resolutions</h2>
+        
+        <div class="log-entry">
+            <span class="student-tag">Student ID: #SR-9921 (VNR VJIET)</span>
+            <span class="question">"I need to run AutoDesk Maya for my animation course. Will the standard laptop suffice?"</span>
+            <div class="solution-box">
+                <span class="staff-label">Institutional Response:</span>
+                <p>For heavy 3D rendering like Maya, we upgraded this student to the <b>ABCom ASUS ROG</b> series with dedicated graphics. Delivery was completed within 18 hours to the Mullanpur campus.</p>
+            </div>
+        </div>
+
+        <div class="log-entry">
+            <span class="student-tag">Student ID: #SR-9945 (CBIT Hyderabad)</span>
+            <span class="question">"I don't have a permanent address in Hyderabad. Can I still rent for a 3-month project?"</span>
+            <div class="solution-box">
+                <span class="staff-label">Institutional Response:</span>
+                <p>Yes. Based on our <b>KYC Policy</b>, we verified the student's Hostel Allotment Letter as valid address proof. The <b>IndiaRentalz WorkMate</b> laptop was delivered to the hostel security desk.</p>
+            </div>
+        </div>
+
+        <div class="log-entry">
+            <span class="student-tag">Student ID: #SR-9980 (IIT Delhi)</span>
+            <span class="question">"The battery on my MacBook Air isn't lasting the full 15 hours promised. What do I do?"</span>
+            <div class="solution-box">
+                <span class="staff-label">Institutional Response:</span>
+                <p>Our technical team diagnosed a background software conflict. Under our <b>24-Hour Replacement Policy</b>, a fresh unit was swapped at the campus gate the next morning by our <b>ABCom</b> logistics partner.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 60px; padding: 40px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; margin-bottom: 25px;">Post a New Query</h2>
+        <form onsubmit="alert('Query Logged! Check back soon for the solution.'); return false;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Student Email" required>
+            </div>
+            <textarea placeholder="How can our site members help you today?" rows="5" required></textarea>
+            <button type="submit" class="nav-btn btn-primary" style="width: 100%; border: none; padding: 15px; font-size: 1rem; cursor: pointer;">Submit to Community Log</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 Gear 4 Rent | Empowering Students in Collaboration with ABCom & IndiaRentalz</p>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCWZsMhVEB1HbbkTC8igAPlsoE8EzqBtzU",
+            authDomain: "gear-4-rent.firebaseapp.com",
+            projectId: "gear-4-rent",
+            storageBucket: "gear-4-rent.firebasestorage.app",
+            messagingSenderId: "1058165643099",
+            appId: "1:1058165643099:web:70fb0e2411710173aeec7e",
+            measurementId: "G-45SJ1RX06L"
+        };
+
+        // Initialize Firebase with protection
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        // Global variables so your other scripts can 'see' the database
+        window.db = firebase.firestore();
+        window.auth = firebase.auth();
+
+        console.log("Connected to Gear 4 Rent Cloud! 🚀");
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Complete Order | Gear 4 Rent</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .checkout-box {
+            display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px;
+            max-width: 1100px; margin: 40px auto; padding: 20px;
+        }
+        .order-panel { background: white; padding: 30px; border-radius: 15px; border: 1px solid #e2e8f0; text-align: left; }
+        .product-summary { background: #f8fafc; padding: 25px; border-radius: 15px; border: 1px dashed #1e3a8a; }
+        .delivery-alert { background: #e0f2fe; color: #0369a1; padding: 15px; border-radius: 10px; margin: 20px 0; font-weight: bold; }
+        .kyc-badge { background: #fef9c3; color: #854d0e; padding: 3px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">⚙️ GEAR 4 RENT</a>
+    <div class="nav-buttons"><a href="services.html" class="nav-btn">Back to Services</a></div>
+</header>
+
+<div class="checkout-box">
+    <div class="order-panel">
+        <h2 style="color:#1e3a8a;">Review & Confirm Order</h2>
+        <p style="color:#64748b; font-size: 0.9rem;">Please check your gear details and delivery schedule.</p>
+        
+        <div class="delivery-alert" id="deliveryInfo">
+            🕒 Calculating optimal delivery time...
+        </div>
+
+        <h4 style="margin-bottom:10px;">KYC Requirements <span class="kyc-badge">MANDATORY</span></h4>
+        <div style="font-size: 0.9rem; color: #475569; margin-bottom: 25px;">
+            <p>• Digital Student ID Scan</p>
+            <p>• Aadhaar Linked Mobile Number for e-Sign</p>
+            <p>• Security Deposit: Refundable within 48 hours of return.</p>
+        </div>
+
+        <form onsubmit="confirmFinal(); return false;">
+            <input type="text" placeholder="Full Campus Address" required>
+            <input type="tel" placeholder="Primary Contact Number" required>
+            <button type="submit" class="nav-btn btn-primary" style="width: 100%; padding: 18px; border:none; font-size: 1.1rem; cursor:pointer;">
+                Confirm Order & Schedule Delivery
+            </button>
+        </form>
+    </div>
+
+    <div class="product-summary">
+        <h3 style="color:#1e3a8a; margin-bottom:15px;">Order Summary</h3>
+        <div id="productDisplay">
+            <h2 id="orderName" style="color:#1e3a8a;">Laptop Model</h2>
+            <p id="orderSpecs" style="margin: 10px 0; color:#475569; font-size: 0.9rem;"></p>
+            <hr style="margin:15px 0; border:0; border-top:1px solid #cbd5e1;">
+            <p>Base Monthly Rent: <b id="orderPrice" style="float:right;">₹0</b></p>
+            <p>Shipping/Setup: <b style="float:right; color:#16a34a;">FREE</b></p>
+            <p>Security Deposit: <b style="float:right;">REFUNDABLE</b></p>
+            <hr style="margin:15px 0; border:0; border-top:1px solid #cbd5e1;">
+            <h3 style="color:#1e3a8a;">Total Due: <span id="finalTotal" style="float:right;">₹0</span></h3>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // AUTOMATIC DATA CAPTURE
+    window.onload = function() {
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get('name') || "Standard Laptop";
+        const price = params.get('price') || "1,200";
+        const specs = params.get('specs') || "General Configuration";
+
+        document.getElementById('orderName').innerText = name;
+        document.getElementById('orderSpecs').innerText = specs;
+        document.getElementById('orderPrice').innerText = "₹" + price;
+        document.getElementById('finalTotal').innerText = "₹" + price;
+
+        // AUTOMATIC DATE/TIME GENERATOR
+        // Sets delivery to exactly 24 hours from current moment
+        const now = new Date();
+        now.setHours(now.getHours() + 24);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('deliveryInfo').innerText = "🚚 Guaranteed Delivery: " + now.toLocaleDateString('en-IN', options) + " by 5:00 PM";
+    }
+
+    function confirmFinal() {
+        alert("Success! Your order for " + document.getElementById('orderName').innerText + " has been logged. \n\nA Gear 4 Rent representative from ABCom/IndiaRentalz will call you shortly to verify your Student ID.");
+        window.location.href = 'index.html';
+    }
+
+    
+function confirmFinal(event) {
+    event.preventDefault(); // Prevents page refresh
+    
+    // Get the price from the Order Summary
+    const finalPrice = document.getElementById('finalTotal').innerText.replace('₹', '');
+    
+    alert("Details Verified! Proceeding to Secure Payment...");
+    
+    // Pass the price to the payment page via URL
+    window.location.href = `payment.html?price=${finalPrice}`;
+}
+</script>
+
+<footer>© 2026 Gear 4 Rent | Partners: IndiaRentalz & ABCom</footer>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCWZsMhVEB1HbbkTC8igAPlsoE8EzqBtzU",
+            authDomain: "gear-4-rent.firebaseapp.com",
+            projectId: "gear-4-rent",
+            storageBucket: "gear-4-rent.firebasestorage.app",
+            messagingSenderId: "1058165643099",
+            appId: "1:1058165643099:web:70fb0e2411710173aeec7e",
+            measurementId: "G-45SJ1RX06L"
+        };
+
+        // Initialize Firebase with protection
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        // Global variables so your other scripts can 'see' the database
+        window.db = firebase.firestore();
+        window.auth = firebase.auth();
+
+        console.log("Connected to Gear 4 Rent Cloud! 🚀");
+    </script>
+</body>
+</html>
+
+
+</body>
+</html>
