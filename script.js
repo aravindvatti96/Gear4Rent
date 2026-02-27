@@ -40,7 +40,27 @@ function orderProduct() {
     }
 }
 
-function submitComplaint() {
+function submitComplaint() {}
     alert("Your complaint has been registered. We will contact you soon.");
-}
+document.addEventListener("DOMContentLoaded", function () {
+
+    db.collection("laptops").get()
+    .then((querySnapshot) => {
+
+        if (querySnapshot.empty) {
+            console.warn("⚠️ 'laptops' collection is EMPTY.");
+            return;
+        }
+
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            console.log("Laptop Found:", data.name, data.price);
+        });
+
+    })
+    .catch((error) => {
+        console.error("❌ Firestore Error:", error);
+    });
+
+});
 

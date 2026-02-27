@@ -1,112 +1,167 @@
 <!DOCTYPE html>
-< lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Secure Payment | Gear 4 Rent</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .payment-container { max-width: 500px; margin: 50px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center; }
-        .payment-option { display: flex; align-items: center; padding: 15px; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
-        .payment-option:hover { border-color: #1e3a8a; background: #f0f4ff; }
-        .payment-option img { height: 30px; margin-right: 15px; }
-        .total-amount { font-size: 1.5rem; font-weight: 800; color: #1e3a8a; margin: 20px 0; }
-    </style>
-</head>
-<>
-    <header><a href="index.html" class="logo">⚙️ GEAR 4 RENT</a></header>
+<meta charset="UTF-8">
+<title>Secure Payment | Gear 4 Rent</title>
 
-    <div class="payment-container">
-        <h2>Complete Your Payment</h2>
-        <p>Order Total (First Month Rent)</p>
-        <div class="total-amount" id="payAmount">₹0</div>
-
-        <div class="payment-option" onclick="processPayment('UPI')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI">
-            <span>Pay via UPI (PhonePe / Google Pay)</span>
-        </div>
-
-        <div class="payment-option" onclick="processPayment('Card')">
-            <span>💳 Debit / Credit Card</span>
-        </div>
-
-        <div class="payment-option" onclick="processPayment('NetBanking')">
-            <span>🏦 Net Banking</span>
-        </div>
-
-        <p style="font-size: 0.8rem; color: #64748b;">🔒 Your transaction is secured with 256-bit encryption.</p>
-    </div>
-
-    <script>
-        // Catch the price from URL
-        window.onload = function() {
-            const params = new URLSearchParams(window.location.search);
-            document.getElementById('payAmount').innerText = "₹" + params.get('price');
-        }
-
-        function processPayment(method) {
-            alert("Processing " + method + " Payment...");
-            setTimeout(() => {
-                alert("🎉 Payment Successful! Your order has been placed.");
-                window.location.href = "index.html";
-            }, 2000); // Simulates a 2-second processing time
-        }
-
-        function processPayment(method) {
-    alert("Processing " + method + " Payment...");
-    
-    // Simulate a successful transaction
-    setTimeout(() => {
-        // --- THIS IS STEP 4A ---
-        // Grab the data from the URL or local variables
-        const params = new URLSearchParams(window.location.search);
-        const laptop = params.get('name') || "Unknown Laptop";
-        const price = params.get('price') || "0";
-
-        // Save to Firebase
-        db.collection("orders").add({
-            laptop: laptop,
-            amount: price,
-            paymentMethod: method,
-            status: "Paid",
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        })
-        .then(() => {
-            alert("🎉 Payment Successful & Order Saved to Cloud!");
-            window.location.href = "index.html";
-        })
-        .catch((error) => {
-            console.error("Database Error: ", error);
-        });
-    }, 2000);
+<style>
+body{
+    font-family: Arial;
+    background: linear-gradient(135deg,#1e3a8a,#0f172a);
+    margin:0;
 }
 
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+.container{
+    max-width:500px;
+    margin:60px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+}
 
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyCWZsMhVEB1HbbkTC8igAPlsoE8EzqBtzU",
-            authDomain: "gear-4-rent.firebaseapp.com",
-            projectId: "gear-4-rent",
-            storageBucket: "gear-4-rent.firebasestorage.app",
-            messagingSenderId: "1058165643099",
-            appId: "1:1058165643099:web:70fb0e2411710173aeec7e",
-            measurementId: "G-45SJ1RX06L"
-        };
+input, select{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
 
-        // Initialize Firebase with protection
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
+button{
+    width:100%;
+    padding:14px;
+    background:#1e3a8a;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
 
-        // Global variables so your other scripts can 'see' the database
-        window.db = firebase.firestore();
-        window.auth = firebase.auth();
+.success-popup{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
 
-        console.log("Connected to Gear 4 Rent Cloud! 🚀");
-    </script>
+.popup-box{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2 id="productTitle"></h2>
+<p id="productSpecs"></p>
+<h3>Total: ₹<span id="productPrice"></span></h3>
+
+<form id="paymentForm">
+<input type="text" id="fullName" placeholder="Full Name" required>
+<input type="email" id="email" placeholder="Email" required>
+
+<select id="paymentMethod" required>
+<option value="">Select Payment Method</option>
+<option>Credit Card</option>
+<option>Debit Card</option>
+<option>UPI</option>
+<option>cash on delivery</option>
+</select>
+
+<input type="text" id="cardNumber" placeholder="Card / UPI Number" required>
+<input type="text" id="expiry" placeholder="Expiry / UPI ID" required>
+<input type="text" id="address" placeholder="enter delivery address" required>
+<button type="submit">Confirm Order & Pay</button>
+</form>
+</div>
+
+<div class="success-popup" id="successPopup">
+<div class="popup-box">
+<h2>✅ Order Confirmed!</h2>
+<p id="orderDetails"></p>
+<button onclick="goHome()">Back to Services</button>
+</div>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+    apiKey: "AIzaSyCWZsMhVEB1HbbkTC8igAPlsoE8EzqBtzU",
+    authDomain: "gear-4-rent.firebaseapp.com",
+    projectId: "gear-4-rent",
+    storageBucket: "gear-4-rent.firebasestorage.app",
+    messagingSenderId: "1058165643099",
+    appId: "1:1058165643099:web:8795bd0b0edf890caeec7e",
+    measurementId: "G-NM319RRN80"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+</script>
+
+<script>
+window.onload = function(){
+    const product = JSON.parse(localStorage.getItem("selectedProduct"));
+    if(product){
+        document.getElementById("productTitle").innerText = product.name;
+        document.getElementById("productSpecs").innerText = product.specs;
+        document.getElementById("productPrice").innerText = product.price;
+    }
+};
+
+document.getElementById("paymentForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const product = JSON.parse(localStorage.getItem("selectedProduct"));
+    const fullName = document.getElementById("fullName").value;
+    const email = document.getElementById("email").value;
+    const paymentMethod = document.getElementById("paymentMethod").value;
+    const cardNumber = document.getElementById("cardNumber").value;
+    const expiry = document.getElementById("expiry").value;
+
+    const orderData = {
+        productName: product.name,
+        productSpecs: product.specs,
+        productPrice: product.price,
+        fullName,
+        email,
+        paymentMethod,
+        cardNumber,
+        expiry,
+        orderID: "G4R" + Math.floor(Math.random()*100000),
+        orderDate: new Date().toLocaleString()
+    };
+
+    // ✅ Store order in Firebase
+    db.collection("orders").add(orderData)
+    .then(()=>{
+        document.getElementById("orderDetails").innerHTML =
+            `Your order for <b>${product.name}</b> has been placed successfully!<br>
+            📦 Your order will be delivered in <b>2 days</b>.<br>Thanks for ordering!`;
+        document.getElementById("successPopup").style.display="flex";
+
+        localStorage.removeItem("selectedProduct");
+    })
+    .catch(err=>{
+        alert("Error storing order: "+err);
+    });
+});
+
+function goHome(){
+    window.location.href="services.html";
+}
+</script>
 
 </body>
 </html>

@@ -1,71 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>About Us | Gear 4 Rent</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>About Us | Gear 4 Rent</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background: #f4f7fc;
+    color: #0f172a;
+}
+
+/* Header */
+header {
+    background: #1e3a8a;
+    color: white;
+    text-align: center;
+    padding: 25px 20px;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Hero Banner */
+.heroo {
+    position: relative;
+    background: url('https://home-rental-service.weebly.com/uploads/9/1/5/3/91531292/ideas-to-save-money-with-rent_orig.jpg') no-repeat center/cover;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.heroo h1 {
+    font-size: 36px;
+    background: rgba(0,0,0,0.35);
+    padding: 20px 30px;
+    border-radius: 12px;
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Mission & Vision */
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.section img {
+    flex: 1;
+    min-width: 280px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+
+.section img:hover {
+    transform: scale(1.03);
+}
+
+.section .text {
+    flex: 1;
+    min-width: 280px;
+}
+
+.section h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #1e3a8a;
+}
+
+.section p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #334155;
+}
+
+/* Timeline Story */
+.timeline {
+    position: relative;
+    margin: 60px 0;
+    padding-left: 40px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 4px;
+    height: 100%;
+    background: #1e3a8a;
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    background: #1e3a8a;
+    border-radius: 50%;
+}
+
+.timeline-item h3 {
+    margin-bottom: 5px;
+    color: #0f172a;
+}
+
+.timeline-item p {
+    color: #334155;
+    font-size: 15px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #0f172a;
+    color: white;
+    font-size: 14px;
+}
+</style>
 </head>
 <body>
 
-<header>
-    <a href="index.html" class="logo">⚙️ GEAR 4 RENT</a>
-    <div class="nav-buttons">
-        <a href="index.html" class="nav-btn">Home</a>
-        <a href="services.html" class="nav-btn">Services</a>
-        <a href="about.html" class="nav-btn">About Us</a>
-        <a href="contact.html" class="nav-btn">Contact</a>
-        <a href="login.html" class="nav-btn btn-primary">Login</a>
-    </div>
-</header>
 
-<div class="container">
-    <div class="card" style="text-align: left; padding: 50px;">
-        <h1 style="color: #1e3a8a; margin-bottom: 20px;">About Gear 4 Rent</h1>
-        
-        <div style="background: #f1f5f9; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
-            <p><b>Organized Year:</b> 2024</p>
-            <p><b>Headquarters:</b> Hyderabad, Telangana</p>
-            <p><b>Core Mission:</b> Democratizing high-end technology for the student community.</p>
+    <header>
+        <div class="nav-buttons">
+            <a href="index.html" class="logo">Gear4Rent</a>
         </div>
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="services.html" class="nav-btn">Services</a>
+            <a href="about.html" class="nav-btn">About Us</a>
+            <a href="contact.html" class="nav-btn">Contact</a>
+            <span id="userDisplay" style="color:white; margin-right:15px;"></span>
 
-        <h3 style="color: #1e3a8a; margin-bottom: 15px;">Our Foundation</h3>
-        <p style="margin-bottom: 25px;">
-            <b>Gear 4 Rent</b> was founded in 2024 to solve a critical problem: the "Technology Gap" in education. While curriculum requirements for AI, Data Science, and Graphic Design are increasing, the cost of the hardware needed to run these applications remains out of reach for many. We bridge this gap by providing high-performance laptops on a flexible, low-cost rental basis.
-        </p>
-
-        <h3 style="color: #1e3a8a; margin-bottom: 15px;">What We Do</h3>
-        <p style="margin-bottom: 25px;">
-            We operate as a specialized student-tech aggregator. We collaborate with industry giants like <b>IndiaRentalz</b> and <b>ABCom</b> to source professional-grade machines. Our team handles the KYC verification, student-specific billing, and frontline technical support, while our partners ensure the hardware is always cutting-edge and perfectly maintained.
-        </p>
-
-        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin-bottom: 30px;">
-
-        <h3 style="color: #1e3a8a; margin-bottom: 20px;">Our Core Policies</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            <div style="background: #ffffff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 10px;">
-                <h4 style="margin-bottom: 10px;">🛡️ Anti-Theft & Security</h4>
-                <p style="font-size: 0.85rem; color: #475569;">All devices are equipped with professional BIOS-level security tracking to ensure safe returns and student accountability.</p>
-            </div>
-            <div style="background: #ffffff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 10px;">
-                <h4 style="margin-bottom: 10px;">🔄 Maintenance Policy</h4>
-                <p style="font-size: 0.85rem; color: #475569;">We offer a 24-hour repair or replacement guarantee. If your gear fails, your work doesn't have to stop.</p>
-            </div>
-            <div style="background: #ffffff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 10px;">
-                <h4 style="margin-bottom: 10px;">💳 Flexible Billing</h4>
-                <p style="font-size: 0.85rem; color: #475569;">Students can choose from Daily, Weekly, or Monthly plans. The longer you rent, the cheaper it gets.</p>
-            </div>
-            <div style="background: #ffffff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 10px;">
-                <h4 style="margin-bottom: 10px;">📑 Transparent KYC</h4>
-                <p style="font-size: 0.85rem; color: #475569;">Verification is done using only a valid College ID and Aadhaar card. No complex paperwork or bank statements required.</p>
-            </div>
+            <a href="login.html" class="nav-btn btn-primary" id="authBtn">Login</a>
         </div>
+    </header>
 
-        <div style="margin-top: 50px; text-align: center;">
-            <p style="font-style: italic; color: #64748b;">"Technology should be an enabler, not a luxury."</p>
-        </div>
-    </div>
+<div class="heroo">
+    <h2>Rent Smart. Save Money. Work Better.</h2>
 </div>
 
-<footer>© 2026 Gear 4 Rent | Secure Student IT Rentals</footer>
+<div class="container">
+
+    <!-- Mission Section -->
+    <div class="section">
+        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80" alt="Mission Image">
+        <div class="text">
+            <h2>Our Mission</h2>
+            <p>Gear 4 Rent aims to provide easy access to high-quality laptops and gadgets for students and professionals, ensuring efficient work without the burden of ownership.</p>
+        </div>
+    </div>
+
+    <!-- Vision Section -->
+    <div class="section">
+        <div class="text">
+            <h2>Our Vision</h2>
+            <p>We envision a world where technology is accessible to everyone, bridging the gap between necessity and ownership with a seamless rental experience.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Vision Image">
+    </div>
+
+    <!-- Company Story Timeline -->
+    <div class="timeline">
+        <div class="timeline-item">
+            <h3>2023: Company Founded</h3>
+            <p>Gear 4 Rent was established to simplify tech access for students and young professionals across India.</p>
+        </div>
+        <div class="timeline-item">
+            <h3>2024: Platform Launch</h3>
+            <p>The website went live, offering an initial inventory of 20 laptops with an easy-to-use rental system.</p>
+        </div>
+        <div class="timeline-item">
+            <h3>2025: Vendor Collaboration</h3>
+            <p>We partnered with trusted vendors to expand inventory and provide flexible rental solutions nationwide.</p>
+        </div>
+    </div>
+
+</div>
+
+<footer>© 2026 Gear 4 Rent | Rent Smart, Save Money</footer>
+
 </body>
 </html>

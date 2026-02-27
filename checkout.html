@@ -17,10 +17,21 @@
 </head>
 <body>
 
-<header>
-    <a href="index.html" class="logo">⚙️ GEAR 4 RENT</a>
-    <div class="nav-buttons"><a href="services.html" class="nav-btn">Back to Services</a></div>
-</header>
+
+    <header>
+        <div class="nav-buttons">
+            <a href="index.html" class="logo">Gear4Rent</a>
+        </div>
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="services.html" class="nav-btn">Services</a>
+            <a href="about.html" class="nav-btn">About Us</a>
+            <a href="contact.html" class="nav-btn">Contact</a>
+            <span id="userDisplay" style="color:white; margin-right:15px;"></span>
+
+            <a href="login.html" class="nav-btn btn-primary" id="authBtn">Login</a>
+        </div>
+    </header>
 
 <div class="checkout-box">
     <div class="order-panel">
@@ -104,34 +115,7 @@ function confirmFinal(event) {
 </script>
 
 <footer>© 2026 Gear 4 Rent | Partners: IndiaRentalz & ABCom</footer>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyCWZsMhVEB1HbbkTC8igAPlsoE8EzqBtzU",
-            authDomain: "gear-4-rent.firebaseapp.com",
-            projectId: "gear-4-rent",
-            storageBucket: "gear-4-rent.firebasestorage.app",
-            messagingSenderId: "1058165643099",
-            appId: "1:1058165643099:web:70fb0e2411710173aeec7e",
-            measurementId: "G-45SJ1RX06L"
-        };
-
-        // Initialize Firebase with protection
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-
-        // Global variables so your other scripts can 'see' the database
-        window.db = firebase.firestore();
-        window.auth = firebase.auth();
-
-        console.log("Connected to Gear 4 Rent Cloud! 🚀");
-    </script>
-</body>
-</html>
 
 
 </body>

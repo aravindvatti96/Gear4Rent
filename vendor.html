@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Become a Vendor | Gear 4 Rent</title>
+
+<style>
+body{
+    font-family: Arial;
+    background: #f1f5f9;
+    padding: 40px;
+}
+
+.container{
+    max-width:600px;
+    background:white;
+    padding:30px;
+    margin:auto;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+input, textarea{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#1e3a8a;
+    color:white;
+    border:none;
+    cursor:pointer;
+    border-radius:8px;
+}
+
+button:hover{
+    background:#0f172a;
+}
+
+.success{
+    text-align:center;
+    color:green;
+    margin-top:15px;
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Become a Vendor</h2>
+
+<input type="text" id="vendorName" placeholder="Your Name">
+<input type="text" id="productName" placeholder="Laptop Model Name">
+<input type="text" id="specs" placeholder="Specifications">
+<input type="number" id="price" placeholder="Monthly Rent Price">
+<input type="text" id="image" placeholder="Image URL (Paste any laptop image link)">
+
+<button onclick="addProduct()">Add Product</button>
+
+<p class="success" id="successMsg">Product Added Successfully!</p>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCWZsMhVEB1HbbkTC8igAPlsoE8EzqBtzU",
+    authDomain: "gear-4-rent.firebaseapp.com",
+    projectId: "gear-4-rent",
+    storageBucket: "gear-4-rent.firebasestorage.app",
+    messagingSenderId: "1058165643099",
+    appId: "1:1058165643099:web:8795bd0b0edf890caeec7e",
+    measurementId: "G-NM319RRN80"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  const auth = firebase.auth();
+  const db = firebase.firestore();   // ✅ FIXED HERE
+
+async function addProduct(){
+
+    // 🔒 Check login (same logic you used before)
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    if(!isLoggedIn){
+        alert("🔒 Please login or create an account to add a product.");
+        window.location.href = "login.html";
+        return;
+    }
+
+    let vendorName = document.getElementById("vendorName").value;
+    let productName = document.getElementById("productName").value;
+    let specs = document.getElementById("specs").value;
+    let price = document.getElementById("price").value;
+    let image = document.getElementById("image").value;
+
+    if(!vendorName || !productName || !specs || !price || !image){
+        alert("Please fill all fields");
+        return;
+    }
+
+    try {
+
+        // ✅ Store in Firestore
+        await db.collection("vendorProducts").add({
+            vendor: vendorName,
+            name: productName,
+            specs: specs,
+            price: price,
+            img: image,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // ✅ Success message
+        document.getElementById("successMsg").style.display="block";
+
+        // Redirect to services page
+        setTimeout(()=>{
+            window.location.href="services.html";
+        },1500);
+
+    } catch(error) {
+        console.error("Error adding product:", error);
+        alert("Error adding product. Check Firestore rules.");
+    }
+}
+</script>
+
+</body>
+</html>

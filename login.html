@@ -1,180 +1,208 @@
 <!DOCTYPE html>
-< lang="en">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login & Register | Gear 4 Rent</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .auth-container {
-            max-width: 400px;
-            margin: 60px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 15px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        }
-        .tab-group {
-            display: flex;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #f1f5f9;
-        }
-        .tab {
-            flex: 1;
-            padding: 10px;
-            cursor: pointer;
-            text-align: center;
-            font-weight: bold;
-            color: #64748b;
-        }
-        .tab.active {
-            color: #1e3a8a;
-            border-bottom: 2px solid #1e3a8a;
-        }
-        .form-group { margin-bottom: 15px; text-align: left; }
-        .form-group label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #1e3a8a; }
-        input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; }
-        .hidden { display: none; }
-        .success-msg {
-            background: #dcfce7;
-            color: #16a34a;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-size: 0.85rem;
-            display: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Login | Gear 4 Rent</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:linear-gradient(135deg,#1e3a8a,#0f172a);
+    margin:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.auth-box{
+    background:white;
+    width:380px;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.3);
+}
+
+.tabs{
+    display:flex;
+    margin-bottom:20px;
+}
+
+.tab{
+    flex:1;
+    padding:10px;
+    text-align:center;
+    cursor:pointer;
+    font-weight:bold;
+    border-bottom:2px solid #ccc;
+}
+
+.tab.active{
+    color:#1e3a8a;
+    border-bottom:2px solid #1e3a8a;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#1e3a8a;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0f172a;
+}
+
+.hidden{ display:none; }
+
+.success{
+    background:#dcfce7;
+    color:#166534;
+    padding:8px;
+    margin-bottom:10px;
+    border-radius:6px;
+    display:none;
+}
+</style>
 </head>
-<>
 
-<header>
-    <a href="index.html" class="logo">⚙️ GEAR 4 RENT</a>
-</header>
+<body>
 
-<div class="auth-container">
-    <div class="tab-group">
-        <div class="tab active" id="loginTab" onclick="switchTab('login')">Login</div>
-        <div class="tab" id="signupTab" onclick="switchTab('signup')">Create Account</div>
-    </div>
+<div class="auth-box">
 
-    <div id="msgBox" class="success-msg"></div>
-
-    <form id="loginForm" onsubmit="handleLogin(event)">
-        <div class="form-group">
-            <label>Student Email</label>
-            <input type="email" id="loginEmail" placeholder="name@college.edu" required>
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" id="loginPass" required>
-        </div>
-        <button type="submit" class="nav-btn btn-primary" style="width:100%; border:none; padding:15px; cursor:pointer;">Sign In</button>
-    </form>
-
-    <form id="signupForm" class="hidden" onsubmit="handleSignup(event)">
-        <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" id="newName" placeholder="Enter your name" required>
-        </div>
-        <div class="form-group">
-            <label>College Email</label>
-            <input type="email" id="newEmail" placeholder="college@edu.in" required>
-        </div>
-        <div class="form-group">
-            <label>Create Password</label>
-            <input type="password" id="newPass" required>
-        </div>
-        <button type="submit" class="nav-btn btn-primary" style="width:100%; border:none; padding:15px; cursor:pointer;">Create Account</button>
-    </form>
+<div class="tabs">
+<div class="tab active" onclick="showLogin()" id="loginTab">Login</div>
+<div class="tab" onclick="showSignup()" id="signupTab">Create Account</div>
 </div>
 
-<script>
-    function switchTab(type) {
-        const loginForm = document.getElementById('loginForm');
-        const signupForm = document.getElementById('signupForm');
-        const loginTab = document.getElementById('loginTab');
-        const signupTab = document.getElementById('signupTab');
+<div class="success" id="msg"></div>
 
-        if(type === 'login') {
-            loginForm.classList.remove('hidden');
-            signupForm.classList.add('hidden');
-            loginTab.classList.add('active');
-            signupTab.classList.remove('active');
-        } else {
-            loginForm.classList.add('hidden');
-            signupForm.classList.remove('hidden');
-            loginTab.classList.remove('active');
-            signupTab.classList.add('active');
-        }
-    }
+<form id="loginForm">
+<input type="email" id="loginEmail" placeholder="Email" required>
+<input type="password" id="loginPass" placeholder="Password" required>
+<button type="submit">Sign In</button>
+</form>
 
-    function handleSignup(e) {
-        e.preventDefault();
-        const name = document.getElementById('newName').value;
-        const email = document.getElementById('newEmail').value;
-        const pass = document.getElementById('newPass').value;
+<form id="signupForm" class="hidden">
+<input type="text" id="newName" placeholder="Full Name" required>
+<input type="email" id="newEmail" placeholder="Email" required>
+<input type="password" id="newPass" placeholder="Create Password" required>
+<button type="submit">Create Account</button>
+</form>
 
-        // Store in LocalStorage (Simulating a database)
-        const userData = { name, email, pass };
-        localStorage.setItem(email, JSON.stringify(userData));
+</div>
 
-        const msgBox = document.getElementById('msgBox');
-        msgBox.innerText = "Account created successfully! Please login now.";
-        msgBox.style.display = "block";
-        
-        switchTab('login'); // Automatically move user to login
-    }
+<!-- Firebase v10 Modular SDK -->
+<script type="module">
 
-    function handleLogin(e) {
-        e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
-        const pass = document.getElementById('loginPass').value;
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, setDoc } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        const storedData = localStorage.getItem(email);
-        
-        if (storedData) {
-            const user = JSON.parse(storedData);
-            if (user.pass === pass) {
-                alert("Welcome back, " + user.name + "! Redirecting to inventory...");
-                sessionStorage.setItem('isLoggedIn', 'true'); // Flag to allow ordering
-                window.location.href = 'services.html';
-            } else {
-                alert("Incorrect password!");
-            }
-        } else {
-            alert("No account found with this email. Please Create an Account first.");
-        }
-    }
+// 🔥 YOUR CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyCWZsMhVEB1HbbkTC8igAPlsoE8EzqBtzU",
+  authDomain: "gear-4-rent.firebaseapp.com",
+  projectId: "gear-4-rent",
+  storageBucket: "gear-4-rent.firebasestorage.app",
+  messagingSenderId: "1058165643099",
+  appId: "1:1058165643099:web:8795bd0b0edf890caeec7e",
+  measurementId: "G-NM319RRN80"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ===== UI SWITCH =====
+window.showLogin = function(){
+document.getElementById("loginForm").classList.remove("hidden");
+document.getElementById("signupForm").classList.add("hidden");
+document.getElementById("loginTab").classList.add("active");
+document.getElementById("signupTab").classList.remove("active");
+}
+
+window.showSignup = function(){
+document.getElementById("signupForm").classList.remove("hidden");
+document.getElementById("loginForm").classList.add("hidden");
+document.getElementById("signupTab").classList.add("active");
+document.getElementById("loginTab").classList.remove("active");
+}
+
+// ===== SIGNUP =====
+document.getElementById("signupForm")
+.addEventListener("submit", async (e) => {
+
+e.preventDefault();
+
+const name = document.getElementById("newName").value;
+const email = document.getElementById("newEmail").value;
+const pass = document.getElementById("newPass").value;
+
+try {
+
+const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+const user = userCredential.user;
+
+// 🔥 STORE DATA IN FIRESTORE
+await setDoc(doc(db, "users", user.uid), {
+    name: name,
+    email: email,
+    role: "student",
+    createdAt: new Date()
+});
+
+const msg = document.getElementById("msg");
+msg.innerText = "Account created successfully! Please login.";
+msg.style.display = "block";
+
+showLogin();
+
+} catch(error){
+alert(error.message);
+}
+
+});
+
+// ===== LOGIN =====
+document.getElementById("loginForm")
+.addEventListener("submit", async (e) => {
+
+e.preventDefault();
+
+const email = document.getElementById("loginEmail").value;
+const pass = document.getElementById("loginPass").value;
+
+try {
+
+await signInWithEmailAndPassword(auth, email, pass);
+
+alert("Login Successful!");
+
+sessionStorage.setItem("isLoggedIn","true");
+
+window.location.href="services.html";
+
+} catch(error){
+alert(error.message);
+}
+
+});
+
 </script>
 
-<footer>© 2026 Gear 4 Rent | Secure Student Portal</footer>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyCWZsMhVEB1HbbkTC8igAPlsoE8EzqBtzU",
-            authDomain: "gear-4-rent.firebaseapp.com",
-            projectId: "gear-4-rent",
-            storageBucket: "gear-4-rent.firebasestorage.app",
-            messagingSenderId: "1058165643099",
-            appId: "1:1058165643099:web:70fb0e2411710173aeec7e",
-            measurementId: "G-45SJ1RX06L"
-        };
-
-        // Initialize Firebase with protection
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-
-        // Global variables so your other scripts can 'see' the database
-        window.db = firebase.firestore();
-        window.auth = firebase.auth();
-
-        console.log("Connected to Gear 4 Rent Cloud! 🚀");
-    
-</script>
 </body>
 </html>
